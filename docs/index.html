@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>松戸市子どもを対象とした不審者情報</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.2/leaflet.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css" />
+        <link rel="stylesheet" href="src/leaflet.timedimension.control.css" />
+        <link rel="stylesheet" href="css/style.css?ver=20170311a" />
+        <style>
+        a.leaflet-control-timecontrol.timecontrol-date {
+            width: 120px;
+            padding-left: 30px !important;
+            font-weight: bold;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <div id="header">
+                <h1>松戸市子どもを対象とした不審者情報</h1>
+                <h2>　データ参照元：<a href="http://www2.wagmap.jp/cp-gis/Portal" target="_blank">くらしの安全マップ（千葉県警）</a>、製作：<a href="https://code4matsudo.org/" target="_blank">Code for Matsudo</a></h2>
+            </div>      
+            <div id="map" class="map"></div>
+            <h5>
+            <strong>【御注意】</strong><br />
+            ・パソコンでの閲覧を推奨します。<br />
+            ・データは千葉県警のくらしの安全マップをもとに手入力しています。<br />
+            　場所等は目安としてご活用ください。<br />
+            ・当ヒートマップは以下の係数を乗じて表示しています。震度と同様のイメージです。<br />
+            　係数が大きいほど赤く表示されます。<br />
+            　痴漢：8、暴行：7、露出：5、つきまとい：4、声かけ：3、盗撮：2<br />
+            ・声かけ等は善意で行われた可能性もあり、必ずしも不審者であるとは限りません。<br />
+            </h5>    
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.2/leaflet.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/ptv-logistics/Leaflet.NonTiledLayer/master/NonTiledLayer.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/ptv-logistics/Leaflet.NonTiledLayer/master/NonTiledLayer.WMS.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/nezasa/iso8601-js-period/master/iso8601.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.min.js"></script>        
+        <script type="text/javascript" src="https://rawgit.com/pa7/heatmap.js/develop/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>
+        <script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+        <script type="text/javascript" src="https://rawgit.com/felixge/node-dateformat/master/lib/dateformat.js"></script>        
+        
+        <script type="text/javascript" src="src/leaflet.timedimension.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.util.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.layer.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.layer.wms.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.layer.geojson.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.player.js"></script>
+        <script type="text/javascript" src="src/leaflet.timedimension.control.js"></script>        
+        <script type="text/javascript" src="js/baselayers.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.ajax('js/app.js', {dataType: 'script'})
+                    .always(function(response) {                        
+                        $("#code").text(response.responseText);
+                        $('pre code').each(function(i, block) {
+                            hljs.highlightBlock(block);
+                        });
+                    });
+            });
+        </script>        
+    </body>
+</html>
